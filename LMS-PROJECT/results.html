@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results - Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fas fa-layer-group"></i></div>
+                <span class="logo-text text-white">LMS</span>
+            </a>
+            <button class="close-btn d-lg-none" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <ul>
+                <li><a href="dashboard.html" class="sidebar-link"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a href="assignments.html" class="sidebar-link"><i class="fas fa-tasks"></i> Assignments</a></li>
+                <li><a href="quiz.html" class="sidebar-link"><i class="fas fa-question-circle"></i> Quiz</a></li>
+                <li><a href="results.html" class="sidebar-link active"><i class="fas fa-chart-bar"></i> Results</a></li>
+                <li><a href="attendance.html" class="sidebar-link"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+                <li><a href="fees.html" class="sidebar-link"><i class="fas fa-file-invoice-dollar"></i> Fees</a></li>
+                <li><a href="notes.html" class="sidebar-link"><i class="fas fa-book"></i> Notes</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <ul>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-user-circle"></i> Profile</a></li>
+                <li><a href="login.html" class="sidebar-link nav-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main" id="mainContent">
+        <!-- Top Navbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="toggle-sidebar-btn" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search-bar d-none d-md-flex">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search grades...">
+                </div>
+            </div>
+            
+            <div class="topbar-right">
+                <button class="icon-btn position-relative">
+                    <i class="far fa-bell"></i>
+                </button>
+                <div class="profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=Student+User&background=2563EB&color=fff" alt="Profile" class="profile-img">
+                    <div class="profile-info d-none d-md-block">
+                        <span class="profile-name">Student User</span>
+                        <span class="profile-role">Computer Science</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Results Content -->
+        <div class="dashboard">
+            <div class="dashboard-header mb-4">
+                <h1 class="page-title">Term Results & Progress</h1>
+                <p class="text-muted">Review your academic performance and historical grades.</p>
+            </div>
+
+            <div class="grid dashboard dashboard-grid-reverse mb-4">
+                
+                <!-- Performance Overview -->
+                <div class="card text-center flex-col-center">
+                    <div class="card-header border-bottom w-100 justify-center mb-3">
+                        <h2 class="card-title">Current GPA</h2>
+                    </div>
+                    <div class="card-body pt-3 pb-4">
+                        <div class="circular-progress mx-auto" style="--progress: 324deg;"> <!-- 90% -->
+                            <div class="inner-circle">
+                                <span class="progress-value text-primary">3.8</span>
+                            </div>
+                        </div>
+                        <p class="font-bold text-lg mt-3">Excellent Standing</p>
+                        <p class="text-sm text-muted">Top 10% of class cohort</p>
+                    </div>
+                </div>
+
+                <!-- Progress Chart Placeholder (Pure CSS Bar Chart) -->
+                <div class="card">
+                    <div class="card-header border-bottom">
+                        <h2 class="card-title">Performance Trend (By Month)</h2>
+                    </div>
+                    <div class="card-body pt-4" style="height: 300px; padding-bottom: 2rem;">
+                        <canvas id="performanceChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grade Table -->
+            <div class="card">
+                <div class="card-header border-bottom bg-light">
+                    <h2 class="card-title">Recent Grades & Examinations</h2>
+                    <button class="btn btn-outline-primary btn-sm"><i class="fas fa-download me-2"></i> Download Transcript</button>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Subject/Course</th>
+                                <th>Assessment Type</th>
+                                <th>Date</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Advanced CSS Layouts</td>
+                                <td>Mid-Term Quiz</td>
+                                <td>Oct 12, 2026</td>
+                                <td class="font-bold text-success">92/100</td>
+                                <td><span class="badge badge-success-light text-success">Passed</span></td>
+                            </tr>
+                            <tr>
+                                <td>JavaScript Algorithms</td>
+                                <td>Project Assignment</td>
+                                <td>Oct 05, 2026</td>
+                                <td class="font-bold text-primary">88/100</td>
+                                <td><span class="badge badge-success-light text-success">Passed</span></td>
+                            </tr>
+                            <tr>
+                                <td>Database Design</td>
+                                <td>Weekly Worksheet</td>
+                                <td>Oct 01, 2026</td>
+                                <td class="font-bold text-danger">55/100</td>
+                                <td><span class="badge badge-danger-light text-danger">Needs Review</span></td>
+                            </tr>
+                            <tr>
+                                <td>React Framework</td>
+                                <td>Final App Project</td>
+                                <td>Sep 28, 2026</td>
+                                <td class="font-bold text-accent">95/100</td>
+                                <td><span class="badge badge-success-light text-success">Passed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>

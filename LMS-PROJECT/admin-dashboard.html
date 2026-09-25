@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        /* Admin specific theme overrides */
+        .admin-sidebar { background-color: #0F172A; } /* Darker slate for admin */
+        .admin-badge { background-color: var(--accent); color: white; font-size: 0.7rem; padding: 2px 6px; border-radius: 4px; vertical-align: middle; margin-left: 8px;}
+        .admin-stat-card { border-top: 4px solid; }
+        .border-primary { border-top-color: var(--primary); }
+        .border-accent { border-top-color: var(--accent); }
+        .border-success { border-top-color: var(--success); }
+        .border-info { border-top-color: var(--info); }
+        
+        .action-cell { display: flex; gap: 0.5rem; justify-content: flex-end;}
+        .table-striped tbody tr:nth-of-type(odd) { background-color: rgba(0,0,0,0.02); }
+        .table th.text-right, .table td.text-right { text-align: right; }
+    </style>
+</head>
+<body class="dashboard-body flex-col-center">
+
+    <!-- Admin Sidebar -->
+    <aside class="sidebar admin-sidebar" id="sidebar">
+        <div class="sidebar-header border-bottom border-light" style="border-color: rgba(255,255,255,0.1) !important;">
+            <a href="index.html" class="logo">
+                <div class="logo-icon bg-accent text-white"><i class="fas fa-shield-alt"></i></div>
+                <span class="logo-text text-white">LMS</span>
+            </a>
+            <button class="close-btn d-lg-none" id="closeSidebar"><i class="fas fa-times"></i></button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <div class="pe-3 ps-3 mb-2 text-xs font-bold text-muted text-uppercase tracking-wider" style="letter-spacing: 1px; opacity:0.5;">Core</div>
+            <ul>
+                <li><a id="nav-dashboard" href="#dashboard-overview" data-target="dashboard-overview" class="sidebar-link active admin-nav-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="manage-courses.html" class="sidebar-link"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a href="manage-students.html" class="sidebar-link"><i class="fas fa-users"></i> Students</a></li>
+            </ul>
+            
+            <div class="pe-3 ps-3 mt-4 mb-2 text-xs font-bold text-muted text-uppercase tracking-wider" style="letter-spacing: 1px; opacity:0.5;">Academics</div>
+            <ul>
+                <li><a href="manage-assignments.html" class="sidebar-link"><i class="fas fa-tasks"></i> Assignments</a></li>
+                <li><a id="nav-quizzes" href="#quizzes" data-target="quizzes" class="sidebar-link admin-nav-link"><i class="fas fa-question-circle"></i> Quizzes</a></li>
+                <li><a id="nav-results" href="#results" data-target="results" class="sidebar-link admin-nav-link"><i class="fas fa-chart-bar"></i> Results</a></li>
+                <li><a id="nav-attendance" href="#attendance" data-target="attendance" class="sidebar-link admin-nav-link"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            </ul>
+
+            <div class="pe-3 ps-3 mt-4 mb-2 text-xs font-bold text-muted text-uppercase tracking-wider" style="letter-spacing: 1px; opacity:0.5;">Administration</div>
+            <ul>
+                <li><a id="nav-fees" href="#fees" data-target="fees" class="sidebar-link admin-nav-link"><i class="fas fa-file-invoice-dollar"></i> Fees</a></li>
+                <li><a id="nav-settings" href="#settings" data-target="settings" class="sidebar-link admin-nav-link"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <ul>
+                <li><a href="admin-login.html" class="sidebar-link nav-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main" id="mainContent">
+        <!-- Top Navbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="toggle-sidebar-btn" id="toggleSidebar"><i class="fas fa-bars"></i></button>
+                <div class="search-bar d-none d-md-flex">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search students, courses, or IDs...">
+                </div>
+            </div>
+            
+            <div class="topbar-right flex align-center">
+                <button class="btn btn-outline-primary btn-sm me-3 d-none d-md-inline-block"><i class="fas fa-plus me-1"></i> Quick Add</button>
+                <button class="icon-btn position-relative me-3">
+                    <i class="far fa-bell"></i>
+                    <span class="notification-badge bg-accent">5</span>
+                </button>
+                <div class="profile-dropdown border-left ps-3">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=F59E0B&color=fff" alt="Admin Profile" class="profile-img">
+                    <div class="profile-info d-none d-md-block">
+                        <span class="profile-name">System Admin</span>
+                        <span class="profile-role">Superuser</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Admin Dashboard Content -->
+        <div class="dashboard admin-content-section" id="dashboard-overview">
+            <div class="dashboard-header mb-4 flex-between align-center">
+                <div>
+                    <h1 class="page-title">Institution Overview</h1>
+                    <p class="text-muted">High-level metrics and recent activity across the platform.</p>
+                </div>
+                <button class="btn btn-secondary btn-sm"><i class="fas fa-download me-2"></i> Export Report</button>
+            </div>
+
+            <!-- Admin KPI Cards -->
+            <div class="stats mb-5">
+                <div class="stat-card admin-stat-card border-primary flex-col align-start">
+                    <div class="flex-between w-100 mb-2">
+                        <h3 class="stat-title m-0">Total Students</h3>
+                        <div class="text-success text-sm"><i class="fas fa-arrow-up"></i> 12%</div>
+                    </div>
+                    <div class="flex align-center gap-3">
+                        <div class="stat-icon bg-primary-light text-primary" style="width: 40px; height: 40px; font-size:1.1rem;"><i class="fas fa-user-graduate"></i></div>
+                        <p class="stat-value text-3xl m-0">2,451</p>
+                    </div>
+                </div>
+
+                <div class="stat-card admin-stat-card border-info flex-col align-start">
+                    <div class="flex-between w-100 mb-2">
+                        <h3 class="stat-title m-0">Active Courses</h3>
+                        <div class="text-success text-sm"><i class="fas fa-arrow-up"></i> 4%</div>
+                    </div>
+                    <div class="flex align-center gap-3">
+                        <div class="stat-icon bg-info-light text-info" style="width: 40px; height: 40px; font-size:1.1rem;"><i class="fas fa-book-open"></i></div>
+                        <p class="stat-value text-3xl m-0">48</p>
+                    </div>
+                </div>
+
+                <div class="stat-card admin-stat-card border-accent flex-col align-start">
+                    <div class="flex-between w-100 mb-2">
+                        <h3 class="stat-title m-0">Pending Assignments</h3>
+                        <div class="text-danger text-sm"><i class="fas fa-arrow-up"></i> 18%</div>
+                    </div>
+                    <div class="flex align-center gap-3">
+                        <div class="stat-icon bg-accent-light text-accent" style="width: 40px; height: 40px; font-size:1.1rem;"><i class="fas fa-file-signature"></i></div>
+                        <p class="stat-value text-3xl m-0">342</p>
+                    </div>
+                </div>
+
+                <div class="stat-card admin-stat-card border-success flex-col align-start">
+                    <div class="flex-between w-100 mb-2">
+                        <h3 class="stat-title m-0">Total Revenue</h3>
+                        <div class="text-success text-sm"><i class="fas fa-arrow-up"></i> 8%</div>
+                    </div>
+                    <div class="flex align-center gap-3">
+                        <div class="stat-icon bg-success-light text-success" style="width: 40px; height: 40px; font-size:1.1rem;"><i class="fas fa-dollar-sign"></i></div>
+                        <p class="stat-value text-3xl m-0">$124k</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout for Management Previews -->
+            <div class="grid dashboard">
+                
+                <!-- Left Col: Student Management Preview -->
+                <div class="card p-0 overflow-hidden">
+                    <div class="card-header bg-light border-bottom p-4">
+                        <div class="flex-between align-center">
+                            <h2 class="card-title m-0">Recent Enrollments</h2>
+                            <a href="manage-students.html" class="btn btn-outline-primary btn-sm">View All Students</a>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-striped m-0 w-100">
+                            <thead>
+                                <tr>
+                                    <th class="ps-4">Student Name</th>
+                                    <th>Course</th>
+                                    <th>Status</th>
+                                    <th class="text-right pe-4">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="flex align-center gap-2">
+                                            <img src="https://ui-avatars.com/api/?name=Emma+Watson&background=random" class="rounded-pill" style="width:32px; height:32px;" alt="">
+                                            <div>
+                                                <div class="font-semibold text-main">Emma Watson</div>
+                                                <div class="text-xs text-muted">emma@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>UI/UX Design</td>
+                                    <td><span class="badge badge-success-light text-success text-xs">Active</span></td>
+                                    <td class="text-right pe-4">
+                                        <div class="action-cell">
+                                            <button class="icon-btn text-info" title="View Profile"><i class="far fa-eye"></i></button>
+                                            <button class="icon-btn text-muted" title="Edit"><i class="far fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="flex align-center gap-2">
+                                            <img src="https://ui-avatars.com/api/?name=James+Smith&background=random" class="rounded-pill" style="width:32px; height:32px;" alt="">
+                                            <div>
+                                                <div class="font-semibold text-main">James Smith</div>
+                                                <div class="text-xs text-muted">james@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Data Science</td>
+                                    <td><span class="badge badge-success-light text-success text-xs">Active</span></td>
+                                    <td class="text-right pe-4">
+                                        <div class="action-cell">
+                                            <button class="icon-btn text-info" title="View Profile"><i class="far fa-eye"></i></button>
+                                            <button class="icon-btn text-muted" title="Edit"><i class="far fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="flex align-center gap-2">
+                                            <img src="https://ui-avatars.com/api/?name=Sophia+Lee&background=random" class="rounded-pill" style="width:32px; height:32px;" alt="">
+                                            <div>
+                                                <div class="font-semibold text-main">Sophia Lee</div>
+                                                <div class="text-xs text-muted">sophia@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>React Framework</td>
+                                    <td><span class="badge badge-danger-light text-danger text-xs">Suspended</span></td>
+                                    <td class="text-right pe-4">
+                                        <div class="action-cell">
+                                            <button class="icon-btn text-info" title="View Profile"><i class="far fa-eye"></i></button>
+                                            <button class="icon-btn text-muted" title="Edit"><i class="far fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="flex align-center gap-2">
+                                            <img src="https://ui-avatars.com/api/?name=Lucas+Brown&background=random" class="rounded-pill" style="width:32px; height:32px;" alt="">
+                                            <div>
+                                                <div class="font-semibold text-main">Lucas Brown</div>
+                                                <div class="text-xs text-muted">lucas@example.com</div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>Web Development</td>
+                                    <td><span class="badge badge-success-light text-success text-xs">Active</span></td>
+                                    <td class="text-right pe-4">
+                                        <div class="action-cell">
+                                            <button class="icon-btn text-info" title="View Profile"><i class="far fa-eye"></i></button>
+                                            <button class="icon-btn text-muted" title="Edit"><i class="far fa-edit"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Right Col: Course & Assignment Management -->
+                <div class="grid dashboard-sub">
+                    
+                    <!-- Quick Actions -->
+                    <div class="card p-4">
+                        <h2 class="card-title mb-4">Quick Actions</h2>
+                        <div class="quick-actions-grid mb-2">
+                            
+                            <a href="manage-courses.html" class="btn btn-secondary flex-col-center p-3 text-center border shadow-none hover-primary-border" style="height: auto; transition:0.3s;">
+                                <i class="fas fa-plus-circle text-2xl text-primary mb-2"></i>
+                                <span class="text-sm font-semibold">New Course</span>
+                            </a>
+                            
+                            <a href="manage-students.html" class="btn btn-secondary flex-col-center p-3 text-center border shadow-none" style="height: auto; transition:0.3s;">
+                                <i class="fas fa-user-plus text-2xl text-info mb-2"></i>
+                                <span class="text-sm font-semibold">Add Student</span>
+                            </a>
+                            
+                            <a href="manage-assignments.html" class="btn btn-secondary flex-col-center p-3 text-center border shadow-none" style="height: auto; transition:0.3s;">
+                                <i class="fas fa-upload text-2xl text-accent mb-2"></i>
+                                <span class="text-sm font-semibold">Upload Assignment</span>
+                            </a>
+                            
+                            <a href="#" class="btn btn-secondary flex-col-center p-3 text-center border shadow-none" style="height: auto; transition:0.3s;">
+                                <i class="fas fa-file-upload text-2xl text-success mb-2"></i>
+                                <span class="text-sm font-semibold">Upload Notes</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Enrollment Trends Chart -->
+                    <div class="card p-4">
+                        <h2 class="card-title mb-3">Enrollment Trends</h2>
+                        <div style="height: 250px; width: 100%;">
+                            <canvas id="enrollmentChart"></canvas>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            
+        </div>
+
+        <!-- Quizzes Section -->
+        <div class="dashboard admin-content-section" id="quizzes" style="display: none;">
+            <div class="dashboard-header mb-4 flex-between align-center">
+                <div>
+                    <h1 class="page-title">Quizzes</h1>
+                    <p class="text-muted">Manage institution quizzes and assessments.</p>
+                </div>
+                <button class="btn btn-primary btn-sm"><i class="fas fa-plus me-2"></i>Create Quiz</button>
+            </div>
+            <div class="card p-0 overflow-hidden">
+                <div class="card-header bg-light border-bottom p-4">
+                    <h2 class="card-title m-0">All Quizzes</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped m-0 w-100">
+                        <thead>
+                            <tr>
+                                <th class="ps-4">#</th>
+                                <th>Quiz Name</th>
+                                <th>Course</th>
+                                <th>Date</th>
+                                <th>Duration</th>
+                                <th>Status</th>
+                                <th class="text-right pe-4">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="ps-4">1</td>
+                                <td><span class="font-semibold text-main">Midterm Assessment</span></td>
+                                <td>Web Development</td>
+                                <td>Apr 20, 2026</td>
+                                <td>60 min</td>
+                                <td><span class="badge badge-success-light text-success text-xs">Active</span></td>
+                                <td class="text-right pe-4"><div class="action-cell"><button class="icon-btn text-info" title="View"><i class="far fa-eye"></i></button><button class="icon-btn text-muted" title="Edit"><i class="far fa-edit"></i></button></div></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">2</td>
+                                <td><span class="font-semibold text-main">Unit 3 Quiz</span></td>
+                                <td>Data Science</td>
+                                <td>Apr 22, 2026</td>
+                                <td>30 min</td>
+                                <td><span class="badge badge-success-light text-success text-xs">Active</span></td>
+                                <td class="text-right pe-4"><div class="action-cell"><button class="icon-btn text-info" title="View"><i class="far fa-eye"></i></button><button class="icon-btn text-muted" title="Edit"><i class="far fa-edit"></i></button></div></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">3</td>
+                                <td><span class="font-semibold text-main">CSS Fundamentals Test</span></td>
+                                <td>UI/UX Design</td>
+                                <td>Apr 25, 2026</td>
+                                <td>45 min</td>
+                                <td><span class="badge badge-warning-light text-accent text-xs">Scheduled</span></td>
+                                <td class="text-right pe-4"><div class="action-cell"><button class="icon-btn text-info" title="View"><i class="far fa-eye"></i></button><button class="icon-btn text-muted" title="Edit"><i class="far fa-edit"></i></button></div></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">4</td>
+                                <td><span class="font-semibold text-main">React Hooks Deep Dive</span></td>
+                                <td>React Framework</td>
+                                <td>Apr 18, 2026</td>
+                                <td>50 min</td>
+                                <td><span class="badge badge-danger-light text-danger text-xs">Closed</span></td>
+                                <td class="text-right pe-4"><div class="action-cell"><button class="icon-btn text-info" title="View"><i class="far fa-eye"></i></button><button class="icon-btn text-muted" title="Edit"><i class="far fa-edit"></i></button></div></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div class="dashboard admin-content-section" id="results" style="display: none;">
+            <div class="dashboard-header mb-4 flex-between align-center">
+                <div>
+                    <h1 class="page-title">Results</h1>
+                    <p class="text-muted">View academic results and performance metrics.</p>
+                </div>
+                <button class="btn btn-secondary btn-sm"><i class="fas fa-download me-2"></i>Export CSV</button>
+            </div>
+            <div class="card p-0 overflow-hidden">
+                <div class="card-header bg-light border-bottom p-4">
+                    <h2 class="card-title m-0">Student Results</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped m-0 w-100">
+                        <thead>
+                            <tr>
+                                <th class="ps-4">Student Name</th>
+                                <th>Course</th>
+                                <th>Quiz / Exam</th>
+                                <th>Score</th>
+                                <th>Grade</th>
+                                <th class="text-right pe-4">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Emma+Watson&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Emma Watson</span>
+                                    </div>
+                                </td>
+                                <td>UI/UX Design</td>
+                                <td>Midterm</td>
+                                <td>88/100</td>
+                                <td><span class="badge badge-success-light text-success text-xs">A</span></td>
+                                <td class="text-right pe-4"><span class="badge badge-success-light text-success text-xs">Passed</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=James+Smith&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">James Smith</span>
+                                    </div>
+                                </td>
+                                <td>Data Science</td>
+                                <td>Unit 3 Quiz</td>
+                                <td>74/100</td>
+                                <td><span class="badge badge-warning-light text-accent text-xs">B</span></td>
+                                <td class="text-right pe-4"><span class="badge badge-success-light text-success text-xs">Passed</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Sophia+Lee&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Sophia Lee</span>
+                                    </div>
+                                </td>
+                                <td>React Framework</td>
+                                <td>React Hooks</td>
+                                <td>52/100</td>
+                                <td><span class="badge badge-danger-light text-danger text-xs">D</span></td>
+                                <td class="text-right pe-4"><span class="badge badge-danger-light text-danger text-xs">Failed</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Lucas+Brown&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Lucas Brown</span>
+                                    </div>
+                                </td>
+                                <td>Web Development</td>
+                                <td>Midterm Assessment</td>
+                                <td>95/100</td>
+                                <td><span class="badge badge-success-light text-success text-xs">A+</span></td>
+                                <td class="text-right pe-4"><span class="badge badge-success-light text-success text-xs">Passed</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Attendance Section -->
+        <div class="dashboard admin-content-section" id="attendance" style="display: none;">
+            <div class="dashboard-header mb-4 flex-between align-center">
+                <div>
+                    <h1 class="page-title">Attendance</h1>
+                    <p class="text-muted">Monitor student attendance records.</p>
+                </div>
+                <button class="btn btn-secondary btn-sm"><i class="fas fa-download me-2"></i>Export Report</button>
+            </div>
+            <div class="card p-0 overflow-hidden">
+                <div class="card-header bg-light border-bottom p-4">
+                    <h2 class="card-title m-0">Attendance Log</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped m-0 w-100">
+                        <thead>
+                            <tr>
+                                <th class="ps-4">Student Name</th>
+                                <th>Course</th>
+                                <th>Date</th>
+                                <th>Session</th>
+                                <th class="text-right pe-4">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Emma+Watson&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Emma Watson</span>
+                                    </div>
+                                </td>
+                                <td>UI/UX Design</td>
+                                <td>Apr 23, 2026</td>
+                                <td>Morning</td>
+                                <td class="text-right pe-4"><span class="badge badge-success-light text-success text-xs">Present</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=James+Smith&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">James Smith</span>
+                                    </div>
+                                </td>
+                                <td>Data Science</td>
+                                <td>Apr 23, 2026</td>
+                                <td>Morning</td>
+                                <td class="text-right pe-4"><span class="badge badge-danger-light text-danger text-xs">Absent</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Sophia+Lee&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Sophia Lee</span>
+                                    </div>
+                                </td>
+                                <td>React Framework</td>
+                                <td>Apr 22, 2026</td>
+                                <td>Afternoon</td>
+                                <td class="text-right pe-4"><span class="badge badge-success-light text-success text-xs">Present</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Lucas+Brown&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Lucas Brown</span>
+                                    </div>
+                                </td>
+                                <td>Web Development</td>
+                                <td>Apr 22, 2026</td>
+                                <td>Morning</td>
+                                <td class="text-right pe-4"><span class="badge badge-danger-light text-danger text-xs">Absent</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Mia+Clark&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Mia Clark</span>
+                                    </div>
+                                </td>
+                                <td>Web Development</td>
+                                <td>Apr 23, 2026</td>
+                                <td>Morning</td>
+                                <td class="text-right pe-4"><span class="badge badge-success-light text-success text-xs">Present</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fees Section -->
+        <div class="dashboard admin-content-section" id="fees" style="display: none;">
+            <div class="dashboard-header mb-4 flex-between align-center">
+                <div>
+                    <h1 class="page-title">Fees</h1>
+                    <p class="text-muted">Track student fee payments and pending dues.</p>
+                </div>
+                <button class="btn btn-primary btn-sm"><i class="fas fa-plus me-2"></i>Add Record</button>
+            </div>
+            <div class="card p-0 overflow-hidden">
+                <div class="card-header bg-light border-bottom p-4">
+                    <h2 class="card-title m-0">Fee Records</h2>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped m-0 w-100">
+                        <thead>
+                            <tr>
+                                <th class="ps-4">Student Name</th>
+                                <th>Course</th>
+                                <th>Amount</th>
+                                <th>Due Date</th>
+                                <th>Paid On</th>
+                                <th class="text-right pe-4">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Emma+Watson&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Emma Watson</span>
+                                    </div>
+                                </td>
+                                <td>UI/UX Design</td>
+                                <td>$1,200</td>
+                                <td>Apr 15, 2026</td>
+                                <td>Apr 12, 2026</td>
+                                <td class="text-right pe-4"><span class="badge badge-success-light text-success text-xs">Paid</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=James+Smith&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">James Smith</span>
+                                    </div>
+                                </td>
+                                <td>Data Science</td>
+                                <td>$950</td>
+                                <td>Apr 30, 2026</td>
+                                <td>—</td>
+                                <td class="text-right pe-4"><span class="badge badge-warning-light text-accent text-xs">Pending</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Sophia+Lee&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Sophia Lee</span>
+                                    </div>
+                                </td>
+                                <td>React Framework</td>
+                                <td>$1,100</td>
+                                <td>Apr 20, 2026</td>
+                                <td>Apr 19, 2026</td>
+                                <td class="text-right pe-4"><span class="badge badge-success-light text-success text-xs">Paid</span></td>
+                            </tr>
+                            <tr>
+                                <td class="ps-4">
+                                    <div class="flex align-center gap-2">
+                                        <img src="https://ui-avatars.com/api/?name=Lucas+Brown&background=random" class="rounded-pill" style="width:32px;height:32px;" alt="">
+                                        <span class="font-semibold text-main">Lucas Brown</span>
+                                    </div>
+                                </td>
+                                <td>Web Development</td>
+                                <td>$800</td>
+                                <td>Apr 10, 2026</td>
+                                <td>—</td>
+                                <td class="text-right pe-4"><span class="badge badge-danger-light text-danger text-xs">Overdue</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="dashboard admin-content-section" id="settings" style="display: none;">
+            <div class="dashboard-header mb-4">
+                <h1 class="page-title">Settings</h1>
+                <p class="text-muted">Manage your admin profile and system preferences.</p>
+            </div>
+            <div class="grid" style="grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <!-- Profile Settings Card -->
+                <div class="card p-4">
+                    <h2 class="card-title mb-4"><i class="fas fa-user-cog me-2 text-primary"></i>Profile Settings</h2>
+                    <form id="settingsForm" onsubmit="return false;">
+                        <div class="mb-3">
+                            <label class="form-label font-semibold text-sm mb-1" for="adminName">Admin Name</label>
+                            <input type="text" id="adminName" class="form-control" value="System Admin" placeholder="Enter your name">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label font-semibold text-sm mb-1" for="adminEmail">Email Address</label>
+                            <input type="email" id="adminEmail" class="form-control" value="admin@lms.edu" placeholder="Enter your email">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label font-semibold text-sm mb-1" for="adminPhone">Phone Number</label>
+                            <input type="tel" id="adminPhone" class="form-control" value="+1 (555) 000-1234" placeholder="Enter phone number">
+                        </div>
+                        <div class="mb-4">
+                            <label class="form-label font-semibold text-sm mb-1" for="adminRole">Role</label>
+                            <input type="text" id="adminRole" class="form-control" value="Superuser" disabled style="background:#f8f9fa; cursor:not-allowed;">
+                        </div>
+                        <button type="submit" class="btn btn-primary" onclick="document.getElementById('settings-toast').style.display='flex'">Update Profile</button>
+                    </form>
+                </div>
+                <!-- System Preferences Card -->
+                <div class="card p-4">
+                    <h2 class="card-title mb-4"><i class="fas fa-sliders-h me-2 text-accent"></i>System Preferences</h2>
+                    <div class="mb-4">
+                        <label class="form-label font-semibold text-sm mb-2">Email Notifications</label>
+                        <div class="flex align-center gap-2 mb-2">
+                            <input type="checkbox" id="notifEnroll" checked>
+                            <label for="notifEnroll" class="text-sm">New student enrollment alerts</label>
+                        </div>
+                        <div class="flex align-center gap-2 mb-2">
+                            <input type="checkbox" id="notifFee" checked>
+                            <label for="notifFee" class="text-sm">Fee payment reminders</label>
+                        </div>
+                        <div class="flex align-center gap-2">
+                            <input type="checkbox" id="notifReport">
+                            <label for="notifReport" class="text-sm">Weekly summary reports</label>
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label font-semibold text-sm mb-1" for="adminTimezone">Timezone</label>
+                        <select id="adminTimezone" class="form-control">
+                            <option selected>UTC+05:00 — Karachi</option>
+                            <option>UTC+00:00 — London</option>
+                            <option>UTC-05:00 — New York</option>
+                            <option>UTC+08:00 — Singapore</option>
+                        </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label font-semibold text-sm mb-1" for="adminTheme">Dashboard Theme</label>
+                        <select id="adminTheme" class="form-control">
+                            <option selected>Light Mode</option>
+                            <option>Dark Mode</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-secondary">Save Preferences</button>
+                </div>
+            </div>
+            <!-- Success Toast -->
+            <div id="settings-toast" style="display:none; position:fixed; bottom:2rem; right:2rem; background:#10B981; color:#fff; padding:0.9rem 1.5rem; border-radius:10px; align-items:center; gap:0.75rem; box-shadow:0 4px 20px rgba(0,0,0,0.15); z-index:9999;">
+                <i class="fas fa-check-circle"></i>
+                <span>Profile updated successfully!</span>
+                <button onclick="document.getElementById('settings-toast').style.display='none'" style="background:none;border:none;color:#fff;cursor:pointer;font-size:1.1rem; margin-left:0.5rem;"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>

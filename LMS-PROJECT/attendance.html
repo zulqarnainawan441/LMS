@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Attendance - Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <!-- Exact same sidebar as other pages -->
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fas fa-layer-group"></i></div>
+                <span class="logo-text text-white">LMS</span>
+            </a>
+            <button class="close-btn d-lg-none" id="closeSidebar"><i class="fas fa-times"></i></button>
+        </div>
+        <nav class="sidebar-menu">
+            <ul>
+                <li><a href="dashboard.html" class="sidebar-link"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a href="assignments.html" class="sidebar-link"><i class="fas fa-tasks"></i> Assignments</a></li>
+                <li><a href="quiz.html" class="sidebar-link"><i class="fas fa-question-circle"></i> Quiz</a></li>
+                <li><a href="results.html" class="sidebar-link"><i class="fas fa-chart-bar"></i> Results</a></li>
+                <li><a href="attendance.html" class="sidebar-link active"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+                <li><a href="fees.html" class="sidebar-link"><i class="fas fa-file-invoice-dollar"></i> Fees</a></li>
+                <li><a href="notes.html" class="sidebar-link"><i class="fas fa-book"></i> Notes</a></li>
+            </ul>
+        </nav>
+        <div class="sidebar-footer">
+            <ul>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-user-circle"></i> Profile</a></li>
+                <li><a href="login.html" class="sidebar-link nav-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main" id="mainContent">
+        <!-- Top Navbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="toggle-sidebar-btn" id="toggleSidebar"><i class="fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-right">
+                <div class="profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=Student+User&background=2563EB&color=fff" alt="Profile" class="profile-img">
+                    <span class="font-bold d-none d-md-block ms-2 text-main">Student</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Attendance Content -->
+        <div class="dashboard">
+            <div class="dashboard-header mb-4">
+                <h1 class="page-title">Attendance Overview</h1>
+                <p class="text-muted">Track your presence across all enrolled modules.</p>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon bg-success-light text-success"><i class="fas fa-check"></i></div>
+                    <div class="stat-details">
+                        <h3 class="stat-title">Classes Attended</h3>
+                        <p class="stat-value">42</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-danger-light text-danger"><i class="fas fa-times"></i></div>
+                    <div class="stat-details">
+                        <h3 class="stat-title">Classes Missed</h3>
+                        <p class="stat-value">3</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary-light text-primary"><i class="fas fa-percentage"></i></div>
+                    <div class="stat-details">
+                        <h3 class="stat-title">Total Attendance</h3>
+                        <p class="stat-value">93%</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card p-4">
+                <div class="flex-between align-center mb-4">
+                    <h2 class="card-title text-xl m-0">October 2026</h2>
+                    <div class="btn-group">
+                        <button class="btn btn-outline-primary btn-sm">&lt;</button>
+                        <button class="btn btn-primary btn-sm">Today</button>
+                        <button class="btn btn-outline-primary btn-sm">&gt;</button>
+                    </div>
+                </div>
+
+                <!-- Calendar View -->
+                <div class="calendar-grid bg-background border rounded">
+                    <!-- Days Header -->
+                    <div class="calendar-day-header font-bold text-center p-2 bg-light">Sun</div>
+                    <div class="calendar-day-header font-bold text-center p-2 bg-light">Mon</div>
+                    <div class="calendar-day-header font-bold text-center p-2 bg-light">Tue</div>
+                    <div class="calendar-day-header font-bold text-center p-2 bg-light">Wed</div>
+                    <div class="calendar-day-header font-bold text-center p-2 bg-light">Thu</div>
+                    <div class="calendar-day-header font-bold text-center p-2 bg-light">Fri</div>
+                    <div class="calendar-day-header font-bold text-center p-2 bg-light">Sat</div>
+
+                    <!-- Example blanks for layout -->
+                    <div class="calendar-day past text-muted">27</div>
+                    <div class="calendar-day past text-muted">28</div>
+                    <div class="calendar-day past text-muted">29</div>
+                    <div class="calendar-day past text-muted">30</div>
+
+                    <!-- Days with data -->
+                    <div class="calendar-day"><span class="date-num">1</span> <span class="badge badge-success-light text-success text-xs mt-1">Present</span></div>
+                    <div class="calendar-day"><span class="date-num">2</span> <span class="badge badge-success-light text-success text-xs mt-1">Present</span></div>
+                    <div class="calendar-day"><span class="date-num">3</span></div>
+                    <div class="calendar-day"><span class="date-num">4</span></div>
+                    <div class="calendar-day"><span class="date-num">5</span> <span class="badge badge-success-light text-success text-xs mt-1">Present</span></div>
+                    <div class="calendar-day"><span class="date-num">6</span> <span class="badge badge-success-light text-success text-xs mt-1">Present</span></div>
+                    <div class="calendar-day"><span class="date-num">7</span> <span class="badge badge-danger-light text-danger text-xs mt-1">Absent</span></div>
+                    <div class="calendar-day"><span class="date-num">8</span> <span class="badge badge-success-light text-success text-xs mt-1">Present</span></div>
+                    <div class="calendar-day"><span class="date-num">9</span> <span class="badge badge-success-light text-success text-xs mt-1">Present</span></div>
+                    <div class="calendar-day bg-primary-light border-primary" style="border: 2px solid;"><span class="date-num font-bold text-primary">10</span> <span class="text-xs text-primary font-bold mt-1">Today</span></div>
+                    
+                    <!-- Empty future days... -->
+                    <div class="calendar-day text-muted"><span class="date-num">11</span></div>
+                    <div class="calendar-day text-muted"><span class="date-num">12</span></div>
+                    <div class="calendar-day text-muted"><span class="date-num">13</span></div>
+                    <div class="calendar-day text-muted"><span class="date-num">14</span></div>
+                    <div class="calendar-day text-muted"><span class="date-num">15</span></div>
+                    <div class="calendar-day text-muted"><span class="date-num">16</span></div>
+                    <div class="calendar-day text-muted"><span class="date-num">17</span></div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

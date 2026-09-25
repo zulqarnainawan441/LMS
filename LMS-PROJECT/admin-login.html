@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page-bg admin-bg">
+
+    <main class="auth-container-wrapper">
+        <div class="card auth border-top-admin">
+            <!-- Header Section -->
+            <div class="card-header text-center">
+                <a href="index.html" class="logo flex-center mb-4 text-secondary">
+                    <div class="logo-icon bg-secondary text-white"><i class="fas fa-layer-group"></i></div>
+                    <span class="logo-text">LMS</span>
+                </a>
+                <div class="badge badge-accent mb-4"><i class="fas fa-shield-alt me-2"></i>Admin Portal</div>
+                <h2 class="card-title">Secure Admin Access</h2>
+                <p class="auth-subtitle">Login to manage courses, students, and settings.</p>
+            </div>
+
+            <!-- Form Section -->
+            <form action="admin-dashboard.html" method="GET" class="auth-form" id="adminLoginForm">
+                
+                <div class="form-group">
+                    <label for="adminId" class="form-label">Admin ID or Email</label>
+                    <div class="input-icon-wrapper">
+                        <i class="far fa-user input-icon"></i>
+                        <input type="text" id="adminId" class="form-input" placeholder="admin@lms.com" required>
+                    </div>
+                    <span class="form-error" id="adminIdError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                        <i class="far fa-eye toggle-password" id="toggleAdminPassword"></i>
+                    </div>
+                </div>
+
+                <div class="form-options mb-4">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="rememberAdmin">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">Remember me on this device</span>
+                    </label>
+                </div>
+
+                <!-- CAPTCHA -->
+                <div class="captcha-group" id="captchaGroupAdmin">
+                    <label class="captcha-label">Security Check</label>
+                    <div class="captcha-box">
+                        <span class="captcha-display" id="captchaCodeAdmin">------</span>
+                        <button type="button" class="captcha-refresh-btn" id="captchaRefreshAdmin" title="Refresh CAPTCHA">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="captcha-input-wrapper">
+                        <i class="fas fa-shield-alt captcha-input-icon"></i>
+                        <input type="text" id="captchaInputAdmin" class="form-input" placeholder="Enter CAPTCHA" autocomplete="off" maxlength="6">
+                    </div>
+                    <span class="captcha-error" id="captchaErrorAdmin"></span>
+                </div>
+
+                <button type="submit" class="btn btn-secondary btn-block btn-lg auth-btn btn-admin">Admin Sign In <i class="fas fa-arrow-right ml-2"></i></button>
+            </form>
+
+            <!-- Footer Links -->
+            <div class="auth-footer text-center mt-5">
+                <a href="login.html" class="auth-link-alt"><i class="fas fa-arrow-left me-2"></i> Back to Student Login</a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

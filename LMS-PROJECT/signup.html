@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create an Account - Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page-bg">
+
+    <main class="auth-container-wrapper auth-container-wide">
+        <div class="card auth">
+            <!-- Header Section -->
+            <div class="card-header text-center">
+                <a href="index.html" class="logo flex-center mb-4">
+                    <div class="logo-icon"><i class="fas fa-layer-group"></i></div>
+                    <span class="logo-text">LMS</span>
+                </a>
+                <h2 class="card-title">Create your Account</h2>
+                <p class="auth-subtitle">Join thousands of students learning new skills.</p>
+            </div>
+
+            <!-- Form Section -->
+            <form action="login.html" method="POST" class="auth-form" id="signupForm" novalidate>
+                
+                <div class="row">
+                    <!-- Full Name -->
+                    <div class="form-group col">
+                        <label for="fullName" class="form-label">Full Name</label>
+                        <div class="input-icon-wrapper">
+                            <i class="far fa-user input-icon"></i>
+                            <input type="text" id="fullName" name="fullName" class="form-input" placeholder="John Doe" required>
+                        </div>
+                        <span class="form-error" id="fullNameError"></span>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="form-group col">
+                        <label for="phone" class="form-label">Phone Number</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-phone-alt input-icon"></i>
+                            <input type="tel" id="phone" name="phone" class="form-input" placeholder="+1 (555) 000-0000" required>
+                        </div>
+                        <span class="form-error" id="phoneError"></span>
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <div class="input-icon-wrapper">
+                        <i class="far fa-envelope input-icon"></i>
+                        <input type="email" id="email" name="email" class="form-input" placeholder="student@example.com" required>
+                    </div>
+                    <span class="form-error" id="emailError"></span>
+                </div>
+
+                <!-- Course Selection -->
+                <div class="form-group">
+                    <label for="course" class="form-label">Primary Course of Interest</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-book-open input-icon"></i>
+                        <select id="course" name="course" class="form-input form-select" required>
+                            <option value="" disabled selected>Select a course...</option>
+                            <option value="web-dev">Modern Web Development</option>
+                            <option value="data-sci">Data Science & Analytics</option>
+                            <option value="ui-ux">UI/UX Design Fundamentals</option>
+                            <option value="cloud">Cloud Architecture</option>
+                        </select>
+                        <i class="fas fa-chevron-down select-arrow"></i>
+                    </div>
+                    <span class="form-error" id="courseError"></span>
+                </div>
+
+                <div class="row">
+                    <!-- Password -->
+                    <div class="form-group col">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-lock input-icon"></i>
+                            <input type="password" id="password" name="password" class="form-input" placeholder="••••••••" required>
+                            <i class="far fa-eye toggle-password" id="toggleSignupPassword"></i>
+                        </div>
+                        <span class="form-error" id="passwordError"></span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group col">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <div class="input-icon-wrapper">
+                            <i class="fas fa-unlock-alt input-icon"></i>
+                            <input type="password" id="confirmPassword" name="confirmPassword" class="form-input" placeholder="••••••••" required>
+                        </div>
+                        <span class="form-error" id="confirmPasswordError"></span>
+                    </div>
+                </div>
+
+                <!-- Terms & Conditions -->
+                <div class="form-options mb-4 mt-2">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">I agree to the <a href="#" class="auth-link">Terms of Service</a> and <a href="#" class="auth-link">Privacy Policy</a></span>
+                    </label>
+                    <span class="form-error mt-1" id="termsError"></span>
+                </div>
+
+                <!-- CAPTCHA -->
+                <div class="captcha-group" id="captchaGroupSignup">
+                    <label class="captcha-label">Security Check</label>
+                    <div class="captcha-box">
+                        <span class="captcha-display" id="captchaCodeSignup">------</span>
+                        <button type="button" class="captcha-refresh-btn" id="captchaRefreshSignup" title="Refresh CAPTCHA">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="captcha-input-wrapper">
+                        <i class="fas fa-shield-alt captcha-input-icon"></i>
+                        <input type="text" id="captchaInputSignup" class="form-input" placeholder="Enter CAPTCHA" autocomplete="off" maxlength="6">
+                    </div>
+                    <span class="captcha-error" id="captchaErrorSignup"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg auth-btn">Create Account</button>
+            </form>
+
+            <!-- Footer Links -->
+            <div class="auth-footer text-center">
+                <p>Already have an account? <a href="login.html" class="auth-link">Sign In</a></p>
+                <div class="auth-divider"><span>OR</span></div>
+                <p><a href="admin-login.html" class="auth-link-alt"><i class="fas fa-user-shield me-2"></i> Area for Instructors & Admins</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

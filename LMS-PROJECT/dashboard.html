@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fas fa-layer-group"></i></div>
+                <span class="logo-text text-white">LMS</span>
+            </a>
+            <button class="close-btn d-lg-none" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <ul>
+                <li><a href="dashboard.html" class="sidebar-link active"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a href="assignments.html" class="sidebar-link"><i class="fas fa-tasks"></i> Assignments</a></li>
+                <li><a href="quiz.html" class="sidebar-link"><i class="fas fa-question-circle"></i> Quiz</a></li>
+                <li><a href="results.html" class="sidebar-link"><i class="fas fa-chart-bar"></i> Results</a></li>
+                <li><a href="attendance.html" class="sidebar-link"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+                <li><a href="fees.html" class="sidebar-link"><i class="fas fa-file-invoice-dollar"></i> Fees</a></li>
+                <li><a href="notes.html" class="sidebar-link"><i class="fas fa-book"></i> Notes</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <ul>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-user-circle"></i> Profile</a></li>
+                <li><a href="login.html" class="sidebar-link nav-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <!-- Overlay for Mobile Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content Area -->
+    <main class="main" id="mainContent">
+        
+        <!-- Top Navbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="toggle-sidebar-btn" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="search d-none d-md-flex">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search courses, assignments...">
+                </div>
+            </div>
+            
+            <div class="topbar-right">
+                <button class="icon-btn position-relative">
+                    <i class="far fa-bell"></i>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=Student+User&background=2563EB&color=fff" alt="Profile" class="profile-img">
+                    <div class="profile-info d-none d-md-block">
+                        <span class="profile-name">Student User</span>
+                        <span class="profile-role">Computer Science</span>
+                    </div>
+                    <i class="fas fa-chevron-down d-none d-md-block ms-2 text-muted"></i>
+                </div>
+            </div>
+        </header>
+
+        <!-- Dashboard Content View -->
+        <div class="dashboard">
+            <div class="dashboard-header mb-4">
+                <h1 class="page-title">Welcome back, Alex!</h1>
+                <p class="text-muted">Here is your learning overview for today.</p>
+            </div>
+
+            <!-- Summary Cards Grid -->
+            <div class="stats mb-4">
+                <div class="stat-card">
+                    <div class="stat-icon bg-primary-light text-primary">
+                        <i class="fas fa-book-reader"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 class="stat-title">Total Courses</h3>
+                        <p class="stat-value">6</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon bg-accent-light text-accent">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 class="stat-title">Assignments Pending</h3>
+                        <p class="stat-value">3</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon bg-success-light text-success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 class="stat-title">Quiz Completed</h3>
+                        <p class="stat-value">12</p>
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-icon bg-info-light text-info">
+                        <i class="fas fa-calendar-day"></i>
+                    </div>
+                    <div class="stat-details">
+                        <h3 class="stat-title">Attendance</h3>
+                        <p class="stat-value">92%</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Two Column Layout for Progress and Events -->
+            <div class="grid dashboard">
+                
+                <!-- Left Column: Course Progress -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title">My Courses Progress</h2>
+                        <a href="#courses" class="card-link">View All</a>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <div class="course-icon bg-primary text-white"><i class="fab fa-js"></i></div>
+                                <div class="course-details">
+                                    <h4>Modern JavaScript Basics</h4>
+                                    <span>Module 4: DOM Manipulation</span>
+                                </div>
+                                <div class="progress-percent">75%</div>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill bg-primary" style="width: 75%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <div class="course-icon bg-secondary text-white"><i class="fas fa-database"></i></div>
+                                <div class="course-details">
+                                    <h4>Database Design SQL</h4>
+                                    <span>Module 2: Normalization</span>
+                                </div>
+                                <div class="progress-percent">40%</div>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill bg-secondary" style="width: 40%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress-item">
+                            <div class="progress-info">
+                                <div class="course-icon bg-accent text-white"><i class="fas fa-paint-brush"></i></div>
+                                <div class="course-details">
+                                    <h4>UI/UX Masterclass</h4>
+                                    <span>Module 6: Prototyping</span>
+                                </div>
+                                <div class="progress-percent">90%</div>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill bg-accent" style="width: 90%;"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Right Column: Upcoming & Circular Chart -->
+                <div class="grid dashboard-sub">
+                    
+                    <!-- Circular Chart Card -->
+                    <div class="card card-center text-center">
+                        <div class="card-header justify-center mb-2">
+                            <h2 class="card-title">Overall Performance</h2>
+                        </div>
+                        <div class="card-body flex-col-center">
+                            <!-- Interactive Chart.js Doughnut -->
+                            <div style="position: relative; width: 160px; height: 160px; margin: 1rem 0;">
+                                <canvas id="overallPerformanceChart"></canvas>
+                                <div class="flex-center" style="position: absolute; top:0; left:0; right:0; bottom:0; pointer-events:none;">
+                                    <span class="text-2xl font-bold text-secondary">85%</span>
+                                </div>
+                            </div>
+                            <p class="text-muted mt-3">Excellent work! You are in the top 15% of your class.</p>
+                        </div>
+                    </div>
+
+                    <!-- Upcoming Tasks -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="card-title">Upcoming Tasks</h2>
+                        </div>
+                        <div class="card-body">
+                            <ul class="task-list">
+                                <li class="task-item">
+                                    <div class="task-icon text-accent bg-accent-light"><i class="fas fa-file-alt"></i></div>
+                                    <div class="task-details">
+                                        <h4>JS Project Submission</h4>
+                                        <span class="text-danger">Due: Today, 11:59 PM</span>
+                                    </div>
+                                </li>
+                                <li class="task-item">
+                                    <div class="task-icon text-info bg-info-light"><i class="fas fa-question-circle"></i></div>
+                                    <div class="task-details">
+                                        <h4>SQL Mid-Term Quiz</h4>
+                                        <span class="text-muted">Due: Tomorrow, 2:00 PM</span>
+                                    </div>
+                                </li>
+                                <li class="task-item">
+                                    <div class="task-icon text-primary bg-primary-light"><i class="fas fa-video"></i></div>
+                                    <div class="task-details">
+                                        <h4>Live UI/UX Workshop</h4>
+                                        <span class="text-muted">Due: Friday, 10:00 AM</span>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/charts.js"></script>
+</body>
+</html>

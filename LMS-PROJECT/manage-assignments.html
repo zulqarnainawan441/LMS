@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Assignments & Notes - Admin Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .admin-sidebar { background-color: #0F172A; }
+    </style>
+</head>
+<body class="dashboard-body flex-col-center">
+
+    <!-- Admin Sidebar -->
+    <aside class="sidebar admin-sidebar" id="sidebar">
+        <div class="sidebar-header border-bottom border-light" style="border-color: rgba(255,255,255,0.1) !important;">
+            <a href="index.html" class="logo">
+                <div class="logo-icon bg-accent text-white"><i class="fas fa-shield-alt"></i></div>
+                <span class="logo-text text-white">LMS</span>
+            </a>
+            <button class="close-btn d-lg-none" id="closeSidebar"><i class="fas fa-times"></i></button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <div class="pe-3 ps-3 mb-2 text-xs font-bold text-muted text-uppercase tracking-wider" style="letter-spacing: 1px; opacity:0.5;">Core</div>
+            <ul>
+                <li><a href="admin-dashboard.html" class="sidebar-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="manage-courses.html" class="sidebar-link"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a href="manage-students.html" class="sidebar-link"><i class="fas fa-users"></i> Students</a></li>
+            </ul>
+            
+            <div class="pe-3 ps-3 mt-4 mb-2 text-xs font-bold text-muted text-uppercase tracking-wider" style="letter-spacing: 1px; opacity:0.5;">Academics</div>
+            <ul>
+                <li><a href="manage-assignments.html" class="sidebar-link active"><i class="fas fa-tasks"></i> Assignments</a></li>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-question-circle"></i> Quizzes</a></li>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-chart-bar"></i> Results</a></li>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            </ul>
+
+            <div class="pe-3 ps-3 mt-4 mb-2 text-xs font-bold text-muted text-uppercase tracking-wider" style="letter-spacing: 1px; opacity:0.5;">Administration</div>
+            <ul>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-file-invoice-dollar"></i> Fees</a></li>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <ul>
+                <li><a href="admin-login.html" class="sidebar-link nav-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main" id="mainContent">
+        <!-- Top Navbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="toggle-sidebar-btn" id="toggleSidebar"><i class="fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-right flex align-center">
+                <div class="profile-dropdown">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=F59E0B&color=fff" alt="Admin Profile" class="profile-img">
+                </div>
+            </div>
+        </header>
+
+        <!-- Manage Assigments/Files Content -->
+        <div class="dashboard">
+            <div class="dashboard-header mb-4">
+                <h1 class="page-title">Manage Course Materials</h1>
+                <p class="text-muted">Upload assignments, distribute notes, and manage due dates.</p>
+            </div>
+
+            <!-- Two Col Grid -->
+            <div class="grid dashboard">
+                
+                <!-- Upload Form Panel -->
+                <div class="card p-4">
+                    <h2 class="card-title border-bottom pb-3 mb-4">Upload New Material</h2>
+                    <form action="#" method="POST" id="uploadForm">
+                        
+                        <div class="form-group">
+                            <label class="form-label">Material Type</label>
+                            <div class="flex gap-4">
+                                <label class="checkbox-container"><input type="radio" name="matType" checked> <span class="checkmark" style="border-radius:50%;"></span> Assignment / Homework</label>
+                                <label class="checkbox-container"><input type="radio" name="matType"> <span class="checkmark" style="border-radius:50%;"></span> Course Notes</label>
+                            </div>
+                        </div>
+
+                        <div class="form-group mt-4">
+                            <label class="form-label">Target Course</label>
+                            <select class="form-input form-select" required>
+                                <option value="" disabled selected>Select Course Mapping</option>
+                                <option>Web Development Mastery</option>
+                                <option>Data Science Fundamentals</option>
+                                <option>UI/UX Design UI Component</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Title / Assignment Name</label>
+                            <input type="text" class="form-input" placeholder="e.g. Midterm SQL Challenge">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Due Date (If Assignment)</label>
+                            <input type="datetime-local" class="form-input">
+                        </div>
+
+                        <!-- Drag and Drop UX -->
+                        <div class="form-group mt-4">
+                            <div class="border border-primary border-dashed rounded p-5 text-center bg-primary-light text-primary" style="cursor: pointer;">
+                                <i class="fas fa-cloud-upload-alt text-3xl mb-3"></i>
+                                <h3 class="font-semibold">Click to upload, or drag file here</h3>
+                                <p class="text-sm opacity-75 mt-1">Supports PDF, DOCX, ZIP files (Max 50MB)</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 btn-lg mt-3"><i class="fas fa-paper-plane me-2"></i> Publish Material</button>
+                    </form>
+                </div>
+
+                <!-- Recent Uploads & Management List -->
+                <div class="grid dashboard-sub">
+                    <div class="card p-0 overflow-hidden">
+                        <div class="card-header bg-light border-bottom p-4">
+                            <h2 class="card-title m-0">Recent Uploads</h2>
+                        </div>
+                        
+                        <div class="list-container">
+                            <div class="list-item">
+                                <div class="list-item-icon bg-info-light text-info"><i class="fas fa-file-pdf"></i></div>
+                                <div class="list-item-content">
+                                    <h3 class="list-item-title">React Hooks Guide <span class="badge badge-accent-light text-accent ms-2 border-0">Notes</span></h3>
+                                    <p class="list-item-subtitle">Published: Today, 8:00 AM</p>
+                                </div>
+                                <div class="list-item-action">
+                                    <button class="icon-btn text-danger"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="list-item">
+                                <div class="list-item-icon bg-danger-light text-danger"><i class="fas fa-tasks"></i></div>
+                                <div class="list-item-content">
+                                    <h3 class="list-item-title">Final Project Proposal <span class="badge badge-primary-light text-primary ms-2 border-0">Assignment</span></h3>
+                                    <p class="list-item-subtitle">Due: Oct 30, 2026</p>
+                                </div>
+                                <div class="list-item-action">
+                                    <button class="icon-btn text-danger"><i class="fas fa-trash"></i></button>
+                                </div>
+                            </div>
+                            
+                            <div class="list-item bg-light">
+                                <div class="list-item-icon bg-success-light text-success"><i class="fas fa-check-circle"></i></div>
+                                <div class="list-item-content">
+                                    <h3 class="list-item-title text-muted">Intro to Variables <span class="badge badge-primary-light text-primary ms-2 border-0">Assignment</span></h3>
+                                    <p class="list-item-subtitle">Due: Passed (Sep 15)</p>
+                                </div>
+                                <div class="list-item-action">
+                                    <button class="icon-btn text-info"><i class="fas fa-chart-pie"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

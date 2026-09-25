@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz - Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body class="dashboard-body">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="fas fa-layer-group"></i></div>
+                <span class="logo-text text-white">LMS</span>
+            </a>
+            <button class="close-btn d-lg-none" id="closeSidebar">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <ul>
+                <li><a href="dashboard.html" class="sidebar-link"><i class="fas fa-th-large"></i> Dashboard</a></li>
+                <li><a href="assignments.html" class="sidebar-link"><i class="fas fa-tasks"></i> Assignments</a></li>
+                <li><a href="quiz.html" class="sidebar-link active"><i class="fas fa-question-circle"></i> Quiz</a></li>
+                <li><a href="results.html" class="sidebar-link"><i class="fas fa-chart-bar"></i> Results</a></li>
+                <li><a href="attendance.html" class="sidebar-link"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+                <li><a href="fees.html" class="sidebar-link"><i class="fas fa-file-invoice-dollar"></i> Fees</a></li>
+                <li><a href="notes.html" class="sidebar-link"><i class="fas fa-book"></i> Notes</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <ul>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-user-circle"></i> Profile</a></li>
+                <li><a href="login.html" class="sidebar-link nav-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main" id="mainContent">
+        <!-- Top Navbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="toggle-sidebar-btn" id="toggleSidebar">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <div class="topbar-right">
+                <div class="timer-badge bg-danger-light text-danger font-bold ps-3 pe-3 py-2 rounded-pill shadow-sm border border-danger">
+                    <i class="far fa-clock"></i> <span id="quizTimer">29:59</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Quiz Content -->
+        <div class="dashboard">
+            <div class="card quiz-card mx-auto" style="max-width: 800px;">
+                <div class="card-header bg-primary text-white" style="border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;">
+                    <div>
+                        <h2 class="card-title text-white">Advanced JavaScript Concepts</h2>
+                        <span class="font-light text-sm text-white opacity-75">Question 1 of 10</span>
+                    </div>
+                </div>
+                
+                <div class="card-body pt-4">
+                    <!-- Progress Bar -->
+                    <div class="progress-bar-bg mb-4">
+                        <div class="progress-bar-fill bg-success" style="width: 10%;"></div>
+                    </div>
+
+                    <!-- Question -->
+                    <div class="quiz-question mb-4">
+                        <h3 class="text-xl font-semibold mb-2">1. What is the output of the following code?</h3>
+                        <pre class="bg-dark text-light p-3 rounded mb-3"><code>console.log(typeof null);</code></pre>
+                    </div>
+
+                    <!-- Options -->
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="A">
+                            <span class="option-text">A) null</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="B">
+                            <span class="option-text">B) undefined</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="C">
+                            <span class="option-text">C) object</span>
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="D">
+                            <span class="option-text">D) number</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="card-footer bg-light p-3 flex-between align-center border-top">
+                    <button class="btn btn-secondary" disabled>Previous</button>
+                    <button class="btn btn-primary">Next Question <i class="fas fa-arrow-right ms-2"></i></button>
+                    <!-- For the last question this would be: -->
+                    <!-- <button class="btn btn-success">Submit Quiz <i class="fas fa-check ms-2"></i></button> -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+    <script>
+        // Simple mock timer for presentation
+        let timeLeft = 1799; // 30 mins in seconds
+        const timerElement = document.getElementById('quizTimer');
+        
+        setInterval(() => {
+            const minutes = Math.floor(timeLeft / 60);
+            let seconds = timeLeft % 60;
+            if (seconds < 10) seconds = '0' + seconds;
+            
+            if(timerElement && timeLeft >= 0) {
+                timerElement.textContent = `${minutes}:${seconds}`;
+                timeLeft--;
+            }
+        }, 1000);
+    </script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

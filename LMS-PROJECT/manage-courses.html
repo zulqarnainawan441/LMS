@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Courses - Admin Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <style>
+        .admin-sidebar { background-color: #0F172A; }
+    </style>
+</head>
+<body class="dashboard-body flex-col-center">
+
+    <!-- Admin Sidebar -->
+    <aside class="sidebar admin-sidebar" id="sidebar">
+        <div class="sidebar-header border-bottom border-light" style="border-color: rgba(255,255,255,0.1) !important;">
+            <a href="index.html" class="logo">
+                <div class="logo-icon bg-accent text-white"><i class="fas fa-shield-alt"></i></div>
+                <span class="logo-text text-white">LMS</span>
+            </a>
+            <button class="close-btn d-lg-none" id="closeSidebar"><i class="fas fa-times"></i></button>
+        </div>
+
+        <nav class="sidebar-menu">
+            <div class="pe-3 ps-3 mb-2 text-xs font-bold text-muted text-uppercase tracking-wider" style="letter-spacing: 1px; opacity:0.5;">Core</div>
+            <ul>
+                <li><a href="admin-dashboard.html" class="sidebar-link"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+                <li><a href="manage-courses.html" class="sidebar-link active"><i class="fas fa-book"></i> Courses</a></li>
+                <li><a href="manage-students.html" class="sidebar-link"><i class="fas fa-users"></i> Students</a></li>
+            </ul>
+            
+            <div class="pe-3 ps-3 mt-4 mb-2 text-xs font-bold text-muted text-uppercase tracking-wider" style="letter-spacing: 1px; opacity:0.5;">Academics</div>
+            <ul>
+                <li><a href="manage-assignments.html" class="sidebar-link"><i class="fas fa-tasks"></i> Assignments</a></li>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-question-circle"></i> Quizzes</a></li>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-chart-bar"></i> Results</a></li>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-calendar-check"></i> Attendance</a></li>
+            </ul>
+
+            <div class="pe-3 ps-3 mt-4 mb-2 text-xs font-bold text-muted text-uppercase tracking-wider" style="letter-spacing: 1px; opacity:0.5;">Administration</div>
+            <ul>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-file-invoice-dollar"></i> Fees</a></li>
+                <li><a href="#" class="sidebar-link"><i class="fas fa-cog"></i> Settings</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-footer">
+            <ul>
+                <li><a href="admin-login.html" class="sidebar-link nav-logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+            </ul>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Main Content -->
+    <main class="main" id="mainContent">
+        <!-- Top Navbar -->
+        <header class="topbar">
+            <div class="topbar-left">
+                <button class="toggle-sidebar-btn" id="toggleSidebar"><i class="fas fa-bars"></i></button>
+            </div>
+            <div class="topbar-right flex align-center">
+                <button class="btn btn-primary d-none d-md-block"><i class="fas fa-plus me-2"></i>Create Course</button>
+                <div class="profile-dropdown ms-4">
+                    <img src="https://ui-avatars.com/api/?name=Admin+User&background=F59E0B&color=fff" alt="Admin Profile" class="profile-img">
+                </div>
+            </div>
+        </header>
+
+        <!-- Manage Courses Content -->
+        <div class="dashboard">
+            <div class="dashboard-header mb-4 flex-between align-center">
+                <div>
+                    <h1 class="page-title">Course Catalog</h1>
+                    <p class="text-muted">Create, edit, and publish course offerings.</p>
+                </div>
+                <button class="btn btn-primary d-md-none"><i class="fas fa-plus"></i></button>
+            </div>
+
+            <!-- Course Grid Layout (Similar to Notes file-card block but customized) -->
+            <div class="grid courses custom-courses-grid">
+                
+                <!-- Course Card 1 -->
+                <div class="card p-0 overflow-hidden flex flex-column h-100">
+                    <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=600&h=300" alt="Course Cover" style="width: 100%; height: 160px; object-fit: cover;">
+                    <div class="p-4 flex-grow-1 flex flex-column">
+                        <div class="flex-between align-center mb-2">
+                            <span class="badge badge-primary-light text-primary border-0 text-xs">Development</span>
+                            <span class="text-xs text-muted"><i class="fas fa-users me-1"></i> 1,204 Enrolled</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Modern Web Development</h3>
+                        <p class="text-sm text-muted mb-4 flex-grow-1">Comprehensive guide spanning HTML5, Advanced CSS Layouts, and Vanilla JavaScript paradigms.</p>
+                        
+                        <div class="flex-between align-center border-top pt-3 mt-auto">
+                            <div class="flex gap-2">
+                                <button class="icon-btn text-muted" title="Edit Course"><i class="far fa-edit"></i></button>
+                                <button class="icon-btn text-info" title="Manage Curriculum"><i class="fas fa-list-ul"></i></button>
+                            </div>
+                            <span class="font-bold text-main">$1,250</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 2 -->
+                <div class="card p-0 overflow-hidden flex flex-column h-100">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=600&h=300" alt="Course Cover" style="width: 100%; height: 160px; object-fit: cover;">
+                    <div class="p-4 flex-grow-1 flex flex-column">
+                        <div class="flex-between align-center mb-2">
+                            <span class="badge badge-info-light text-info border-0 text-xs">Data Science</span>
+                            <span class="text-xs text-muted"><i class="fas fa-users me-1"></i> 843 Enrolled</span>
+                        </div>
+                        <h3 class="text-lg font-bold mb-2">Data Science & Analytics</h3>
+                        <p class="text-sm text-muted mb-4 flex-grow-1">Learn to extract insights from massive datasets using Python, Pandas, and visualization tools.</p>
+                        
+                        <div class="flex-between align-center border-top pt-3 mt-auto">
+                            <div class="flex gap-2">
+                                <button class="icon-btn text-muted" title="Edit Course"><i class="far fa-edit"></i></button>
+                                <button class="icon-btn text-info" title="Manage Curriculum"><i class="fas fa-list-ul"></i></button>
+                            </div>
+                            <span class="font-bold text-main">$900</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course Card 3 -->
+                <div class="card p-0 overflow-hidden flex flex-column h-100">
+                    <div class="bg-light flex-col-center" style="height: 160px;">
+                        <i class="fas fa-image text-muted text-4xl opacity-50"></i>
+                    </div>
+                    <div class="p-4 flex-grow-1 flex flex-column">
+                        <div class="flex-between align-center mb-2">
+                            <span class="badge badge-accent-light text-accent border-0 text-xs text-uppercase">Draft</span>
+                        </div>
+                        <h3 class="text-lg font-bold text-muted mb-2">Advanced React Patterns</h3>
+                        <p class="text-sm text-muted mb-4 flex-grow-1">Deep dive into custom hooks, context API, and state management at scale.</p>
+                        
+                        <div class="flex-between align-center border-top pt-3 mt-auto">
+                            <button class="btn btn-outline-primary w-100 btn-sm">Complete Setup</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            
+        </div>
+    </main>
+
+    <script src="js/dashboard.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Learning Management System (LMS)</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet (includes Auth pages layout CSS) -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="auth-page-bg">
+
+    <main class="auth-container-wrapper">
+        <div class="card auth">
+            <!-- Header Section -->
+            <div class="card-header text-center">
+                <a href="index.html" class="logo flex-center mb-4">
+                    <div class="logo-icon"><i class="fas fa-layer-group"></i></div>
+                    <span class="logo-text">LMS</span>
+                </a>
+                <h2 class="card-title">Welcome Back, Student!</h2>
+                <p class="auth-subtitle">Please enter your details to access your dashboard.</p>
+            </div>
+
+            <!-- Form Section -->
+            <form action="dashboard.html" method="GET" class="auth-form" id="studentLoginForm">
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <div class="input-icon-wrapper">
+                        <i class="far fa-envelope input-icon"></i>
+                        <input type="email" id="email" class="form-input" placeholder="student@example.com" required>
+                    </div>
+                    <span class="form-error" id="emailError"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="input-icon-wrapper">
+                        <i class="fas fa-lock input-icon"></i>
+                        <input type="password" id="password" class="form-input" placeholder="••••••••" required>
+                        <i class="far fa-eye toggle-password" id="togglePassword"></i>
+                    </div>
+                </div>
+
+                <div class="form-options">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="rememberMe">
+                        <span class="checkmark"></span>
+                        <span class="checkbox-text">Remember me</span>
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <!-- CAPTCHA -->
+                <div class="captcha-group" id="captchaGroupLogin">
+                    <label class="captcha-label">Security Check</label>
+                    <div class="captcha-box">
+                        <span class="captcha-display" id="captchaCodeLogin">------</span>
+                        <button type="button" class="captcha-refresh-btn" id="captchaRefreshLogin" title="Refresh CAPTCHA">
+                            <i class="fas fa-sync-alt"></i>
+                        </button>
+                    </div>
+                    <div class="captcha-input-wrapper">
+                        <i class="fas fa-shield-alt captcha-input-icon"></i>
+                        <input type="text" id="captchaInputLogin" class="form-input" placeholder="Enter CAPTCHA" autocomplete="off" maxlength="6">
+                    </div>
+                    <span class="captcha-error" id="captchaErrorLogin"></span>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block btn-lg auth-btn">Sign In</button>
+            </form>
+
+            <!-- Footer Links -->
+            <div class="auth-footer text-center">
+                <p>Don't have an account? <a href="signup.html" class="auth-link">Sign up</a></p>
+                <div class="auth-divider"><span>OR</span></div>
+                <p><a href="admin-login.html" class="auth-link-alt"><i class="fas fa-user-shield me-2"></i> Login as Administrator</a></p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>

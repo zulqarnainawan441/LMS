@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Management System (LMS) - Professional Platform</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <!-- Google Fonts for Modern Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 1. Navigation bar -->
+    <nav class="navbar">
+        <div class="container nav-wrap">
+            <a href="index.html" class="logo">
+                <div class="logo-icon"><i class="icon icon-logo"></i></div>
+                <span class="logo-text">LMS</span>
+            </a>
+            
+            <button class="nav-toggle" id="mobile-menu-btn">
+                <i class="icon icon-menu"></i>
+            </button>
+
+            <ul class="nav" id="nav-links">
+                <li><a href="index.html" class="nav-link active">Home</a></li>
+                <li><a href="#courses" class="nav-link">Courses</a></li>
+                <li><a href="#features" class="nav-link">About</a></li>
+                <li class="nav-mobile mobile-divider">
+                    <a href="login.html" class="nav-link login">Login</a>
+                </li>
+                <li class="nav-mobile">
+                    <a href="signup.html" class="btn btn-primary">Signup</a>
+                </li>
+            </ul>
+
+            <div class="nav-actions">
+                <div class="search">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" class="search-input" placeholder="Search courses, assignments...">
+                </div>
+                <a href="login.html" class="nav-link login">Login</a>
+                <a href="signup.html" class="btn btn-primary">Signup</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 2. Hero Section -->
+    <header class="hero">
+        <div class="container hero-wrap">
+            <div class="hero-content">
+                <span class="badge badge-accent mb-4">Master new skills today</span>
+                <h1 class="hero-title">Unlock Your Potential with <span>World-Class</span> Learning</h1>
+                <p class="hero-text">Transform your career with industry-leading courses, expert instructors, and a modern learning experience designed for your success.</p>
+                <div class="hero-actions">
+                    <a href="signup.html" class="btn btn-primary btn-lg">Start Learning</a>
+                    <a href="login.html" class="btn btn-outline-primary btn-lg">Login</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Students collaborating" class="hero-img shadow">
+            </div>
+        </div>
+    </header>
+
+    <!-- 3. Features Section -->
+    <section id="features" class="features section bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Everything you need to succeed</h2>
+                <p class="section-subtitle">A powerful, all-in-one learning management system built for the modern student.</p>
+            </div>
+            
+            <div class="grid features">
+                <!-- Feature 1 -->
+                <div class="card feature">
+                    <div class="feature-icon bg-primary-light text-primary">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3 class="card-title">Online Courses</h3>
+                    <p class="feature-text">Access high-quality video content from industry experts anytime, anywhere.</p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="card feature">
+                    <div class="feature-icon bg-accent-light text-accent">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="card-title">Assignments</h3>
+                    <p class="feature-text">Apply what you've learned through practical, hands-on assignments and projects.</p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="card feature">
+                    <div class="feature-icon bg-primary-light text-primary">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <h3 class="card-title">Quizzes</h3>
+                    <p class="feature-text">Test your knowledge and reinforce learning with interactive quizzes and assessments.</p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="card feature">
+                    <div class="feature-icon bg-accent-light text-accent">
+                        <i class="fas fa-columns"></i>
+                    </div>
+                    <h3 class="card-title">Student Dashboard</h3>
+                    <p class="feature-text">A personalized hub to organize your schedule, access materials, and stay on track.</p>
+                </div>
+                
+                <!-- Feature 5 -->
+                <div class="card feature">
+                    <div class="feature-icon bg-primary-light text-primary">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3 class="card-title">Progress Tracking</h3>
+                    <p class="feature-text">Visualize your growth with detailed analytics, course progression, and completion stats.</p>
+                </div>
+                
+                <!-- Feature 6 (Placeholder for symmetry) -->
+                <div class="card feature">
+                    <div class="feature-icon bg-accent-light text-accent">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="card-title">Certifications</h3>
+                    <p class="feature-text">Earn verifiable certificates upon completion to showcase your skills to employers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. Popular Courses Section -->
+    <section id="courses" class="courses section">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Explore Popular Courses</h2>
+                <p class="section-subtitle">Join thousands of students learning in-demand skills.</p>
+            </div>
+            
+            <div class="grid courses">
+                <!-- Course 1 -->
+                <div class="card course">
+                    <div class="course-img bg-secondary flex-center text-white">
+                        <i class="fab fa-js-square fa-3x"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="course-info">
+                            <span class="badge badge-primary-light">Web Dev</span>
+                            <span class="course-rating"><i class="fas fa-star text-accent"></i> 4.9</span>
+                        </div>
+                        <h3 class="card-title">Modern JavaScript from the Beginning</h3>
+                        <p class="course-author">By Advanced Web Academy</p>
+                        <div class="card-footer">
+                            <span class="course-price">$49.99</span>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course 2 -->
+                <div class="card course">
+                    <div class="course-img bg-primary flex-center text-white">
+                        <i class="fab fa-python fa-3x"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="course-info">
+                            <span class="badge badge-primary-light">Data Science</span>
+                            <span class="course-rating"><i class="fas fa-star text-accent"></i> 4.8</span>
+                        </div>
+                        <h3 class="card-title">Python for Data Analysis & Visualization</h3>
+                        <p class="course-author">By Data Experts Inc.</p>
+                        <div class="card-footer">
+                            <span class="course-price">$59.99</span>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Course 3 -->
+                <div class="card course">
+                    <div class="course-img bg-accent flex-center text-white">
+                        <i class="fas fa-palette fa-3x"></i>
+                    </div>
+                    <div class="card-body">
+                        <div class="course-info">
+                            <span class="badge badge-primary-light">Design</span>
+                            <span class="course-rating"><i class="fas fa-star text-accent"></i> 4.9</span>
+                        </div>
+                        <h3 class="card-title">Complete UI/UX Design Fundamentals</h3>
+                        <p class="course-author">By Creative Studio</p>
+                        <div class="card-footer">
+                            <span class="course-price">$39.99</span>
+                            <a href="#" class="btn btn-outline-primary btn-sm">Enroll Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="#" class="btn btn-secondary btn-lg">View All Courses</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. Testimonials Section -->
+    <section class="testimonials section bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">What Our Students Say</h2>
+                <p class="section-subtitle">Real feedback from actual learners who upgraded their careers.</p>
+            </div>
+            
+            <div class="grid testimonials">
+                <div class="card testimonial">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"Learning Management System (LMS) completely transformed how I learn. The progress tracking keeps me motivated, and the projects are exactly what employers are looking for."</p>
+                    <div class="author">
+                        <div class="avatar">SJ</div>
+                        <div class="author-details">
+                            <h4>Sarah Jenkins</h4>
+                            <span>Frontend Developer</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card testimonial">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"The student dashboard is incredibly intuitive. I love how I can see my assignments and quiz grades all in one clean, modern interface."</p>
+                    <div class="author">
+                        <div class="avatar bg-accent">MK</div>
+                        <div class="author-details">
+                            <h4>Michael K.</h4>
+                            <span>Data Analyst</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card testimonial">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"I've tried other platforms, but the UI/UX here is top-notch. It makes the entire learning experience feels professional and frictionless."</p>
+                    <div class="author">
+                        <div class="avatar bg-secondary">EL</div>
+                        <div class="author-details">
+                            <h4>Emily Larson</h4>
+                            <span>UX Designer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. Map / Location Section -->
+    <section class="map-section section bg-light">
+        <div class="container">
+            <div class="section-header text-center">
+                <h2 class="section-title">Our Location</h2>
+                <p class="section-subtitle">Find us at our main campus in Sargodha.</p>
+            </div>
+            
+            <div class="map-container shadow-lg">
+                <iframe 
+                    src="https://maps.google.com/maps?q=University%20Road,%20Sargodha,%20Pakistan&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <div class="logo-icon"><i class="icon icon-logo"></i></div>
+                        <span class="logo-text text-white">LMS</span>
+                    </a>
+                    <p class="footer-text">Empowering the next generation of professionals with modern tools and world-class education.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Platform</h4>
+                    <ul>
+                        <li><a href="#">Browse Courses</a></li>
+                        <li><a href="#">Student Dashboard</a></li>
+                        <li><a href="#">Certificates</a></li>
+                        <li><a href="#">Pricing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Cookie Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Learning Management System (LMS). All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+</html>
